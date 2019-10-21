@@ -2,7 +2,7 @@
 package deque;
 
 public class Aluno {
-    private String nome;
+    private String noAme;
     private String matricula;
     
     public Aluno(String n, String m){
