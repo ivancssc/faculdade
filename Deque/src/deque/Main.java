@@ -8,45 +8,71 @@ public class Main {
 
    
     public static void main(String[] args) {
-        Fila myFila = new Fila();
+        Deque myDeque = new Deque();
         
-        //CRIANDO FILA        
-        System.out.println("--------------------FILA---------------------");
-        myFila.enQueue(new Aluno("Ivan", "144181006"));
-        myFila.enQueue(new Aluno("Marcelo", "10293012"));
-        myFila.enQueue(new Aluno("Jayme", "01928012901"));
-        myFila.enQueue(new Aluno("Paulo", "819289128"));
-        myFila.enQueue(new Aluno("Caio", "10290129102"));
+        //CRIANDO (ADICIONANDO TODOS COMO UMA FILA)       
+        System.out.println("--------------------DEQUE---------------------");
+        myDeque.enQueue(new Aluno("Ivan", "144181006"));
+        myDeque.enQueue(new Aluno("Marcelo", "10293012"));
+        myDeque.enQueue(new Aluno("Jayme", "01928012901"));
+        myDeque.enQueue(new Aluno("Paulo", "819289128"));
+        myDeque.enQueue(new Aluno("Caio", "10290129102"));
         
-        //PRINTANDO A FILA        
-        myFila.printQueue();
+        //PRINTANDO O DEQUE        
+        myDeque.printQueue();
+         
+        //REMOVENDO DO DEQUE (FRENTE)
+        myDeque.popFront();
+                
+        //PRINTANDO O DEQUE
+        System.out.println("\n");
+        myDeque.printQueue();
         
-        //REMOVENDO DA FILA
-        myFila.deQueue();
+        //REMOVENDO DO DEQUE (FRENTE)
+        myDeque.popFront();
+                
+        //PRINTANDO O DEQUE
+        System.out.println("\n");
+        myDeque.printQueue();
+        
+        
+        //REMOVENDO DO DEQUE (FUNDO)
+        //myDeque.popBack();
                 
         //PRINTANDO A FILA
+        //System.out.println("\n");
+        //myDeque.printQueue();
+        
+        // ADICIONANDO NO DEQUE (FUNDO)
+        myDeque.pushBack(new Aluno("Ivan", "144181006"));
+        
+        //PRINTANDO O DEQUE
         System.out.println("\n");
-        myFila.printQueue();
+        myDeque.printQueue();
         
-        //ADICIONANDO NA FILA
-        myFila.enQueue(new Aluno("Habbib (cadu)", "41234344"));              
+        // ADICIONANDO NO DEQUE (FRENTE)
+        myDeque.pushFront(new Aluno("Joelma", "123123123"));
         
-        //PRINTANDO A FILA
+        //PRINTANDO O DEQUE
         System.out.println("\n");
-        myFila.printQueue();
+        myDeque.printQueue();
         
-        //LIMPANDO
-        myFila.makeEmpty();
         
-        //PRINTANDO A FILA
-        System.out.println("\n");
-        myFila.printQueue();
         
-        //ADICIONANDO NA FILA
-        myFila.enQueue(new Aluno("Carlos", "1543321"));              
         
-        //PRINTANDO A FILA        
-        myFila.printQueue();
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       
         
     }
     
