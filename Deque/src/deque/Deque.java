@@ -32,7 +32,7 @@ public class Deque {
         first = last = null;
     }
     
-    public void enQueue(Object e){ //MESMA COISA DO PUSHFRONT
+    public void enQueue(Object e){ //MESMA COISA DO PUSHFRONT E NO FIM DAS COISAS N TA SERVINDO PRA MUITA COISA SO FOI EU FZD UM TESTE (ISSO É PRA FILA)
         queueNode element = new queueNode(e, null, null);
         if(isEmpty()){
             first = last = element;
@@ -41,7 +41,7 @@ public class Deque {
         }
     }
     
-    public void pushFront(Object e) {
+    public void pushFront(Object e) { // ADICIONA UM ELEMENTO NA FRENTE DA FILA
         queueNode element = new queueNode(e, null, null);
         if (isEmpty()) {
             first = last = element;
@@ -50,7 +50,7 @@ public class Deque {
         }
     }
     
-    public void pushBack(Object e) {
+    public void pushBack(Object e) { //ADICIONA UM ELEMENTO NO FUNDO DA FILA
         queueNode element = new queueNode(e, null, null);
         if (isEmpty()) {
             first = last = element;
@@ -59,7 +59,7 @@ public class Deque {
         }
     }
 
-    public Object popFront() {
+    public Object popFront() { //REMOVE ITEN DA FRENTE
         if (isEmpty()) {
             return null;
         }
@@ -68,7 +68,7 @@ public class Deque {
         return value;
     }
     
-    public Object popBack() {
+    public Object popBack() { //REMOVE ITEM DO FUNDO
         if (isEmpty()) {
             return null;
         }
@@ -77,7 +77,7 @@ public class Deque {
         return value;
     }
 
-    public void printQueue() {
+    public void printQueue() { //PRINTA A FILA
         queueNode itr = first;
 
         while (itr != null) {

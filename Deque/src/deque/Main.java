@@ -50,7 +50,7 @@ public class Main {
         System.out.println("\n");
         myDeque.printQueue();
         
-        // ADICIONANDO NO DEQUE (FRENTE)
+        // ADICIONANDO NO DEQUE (FRENTE)- NÃO ESTA FUNCIONANDO CERTO
         myDeque.pushFront(new Aluno("Joelma", "123123123"));
         
         //PRINTANDO O DEQUE
