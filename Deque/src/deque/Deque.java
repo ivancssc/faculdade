@@ -5,80 +5,83 @@ package deque;
  */
 public class Deque {
 
-    private queueNode first, last;
+    private DequeNode first, last, previous;    
+    private int size;
 
-    private class queueNode {
+    private class DequeNode {
 
         private Object element;
-        private queueNode next;
-        private queueNode before;
+        private DequeNode next;
 
-        private queueNode(Object e, queueNode n, queueNode b) {
+        public DequeNode(Object e, DequeNode n) {
             element = e;
             next = n;
-            before = b;
         }
     }
 
     public Deque() {
-        first = last = null;
+        size = 0;
+        first = new DequeNode(null, null);
+        last = new DequeNode(null, null);        
     }
 
     public boolean isEmpty() {
-        return (first == null);
+        return (size == 0 || first == null);
     }
-
+    
     public void makeEmpty() {
-        first = last = null;
+        size = 0;
+        first = last = null;        
     }
     
-    public void enQueue(Object e){ //MESMA COISA DO PUSHFRONT E NO FIM DAS COISAS N TA SERVINDO PRA MUITA COISA SO FOI EU FZD UM TESTE (ISSO É PRA FILA)
-        queueNode element = new queueNode(e, null, null);
-        if(isEmpty()){
-            first = last = element;
-        }else{
-            last.next = last = element;
-        }
-    }
-    
-    public void pushFront(Object e) { // ADICIONA UM ELEMENTO NA FRENTE DA FILA
-        queueNode element = new queueNode(e, null, null);
+    public void pushFront(Object e) { //ADICIONA ITEM NA FRENTE
         if (isEmpty()) {
-            first = last = element;
+            first.next = last.next = new DequeNode(e, null);
         } else {
-            first.before = first = element;
+            first.next = new DequeNode(e, first.next);
         }
-    }
-    
-    public void pushBack(Object e) { //ADICIONA UM ELEMENTO NO FUNDO DA FILA
-        queueNode element = new queueNode(e, null, null);
-        if (isEmpty()) {
-            first = last = element;
-        } else {
-            last.next = last = element;
-        }
+        size++;
     }
 
-    public Object popFront() { //REMOVE ITEN DA FRENTE
+    public void pushBack(Object elem) { //ADICIONA ITEM NO FUNDO
+        if (isEmpty()) {
+            first.next = last.next = new DequeNode(elem, null);
+        } else {
+            last.next.next = last.next = new DequeNode(elem, null);
+        }
+        size++;
+    }
+
+    public Object popFront() { //REMOVE ITEM DA FRENTE
         if (isEmpty()) {
             return null;
         }
-        Object value = first.element;
-        first = first.next;
-        return value;
-    }
+        first.next = first.next.next;
+        return null;
+    }   
     
-    public Object popBack() { //REMOVE ITEM DO FUNDO
+//    public Object popBack() { //REMOVE ITEM DO FIM (NAO CONSEGUI FAZER)
+//        
+//    }     
+
+    
+    public Object front() { //DIZ QUEM É O PRIMEIRO DA FILA
         if (isEmpty()) {
             return null;
-        }
-        Object value = last.element;
-        last = last.before;
-        return value;
+        }        
+        return first.next.element;     
+       
     }
-
-    public void printQueue() { //PRINTA A FILA
-        queueNode itr = first;
+    
+    public Object back() { //DIZ QUEM É O ULTIMO DA FILA
+        if (isEmpty()) {
+            return null;
+        }  
+        return last.next.element;            
+    }
+    
+    public void printDeque() { //PRINTA A FILA
+        DequeNode itr = first.next;
 
         while (itr != null) {
             System.out.println(itr.element.toString());
@@ -86,5 +89,3 @@ public class Deque {
         }
     }
 }
-
-
