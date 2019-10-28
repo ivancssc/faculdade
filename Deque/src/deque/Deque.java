@@ -1,28 +1,31 @@
 package deque;
 
 /*
- * @author Ivan Cavalvalcante Silva - 144181006
+ * Ivan Cavalvalcante Silva - 144181006
+ * Marcelo Matos Carvalho - 042181009
  */
 public class Deque {
 
-    private DequeNode first, last, previous;    
+    private DequeNode first, last;    
     private int size;
 
     private class DequeNode {
 
         private Object element;
         private DequeNode next;
+        private DequeNode prev;
 
-        public DequeNode(Object e, DequeNode n) {
+        public DequeNode(Object e, DequeNode n, DequeNode p) {
             element = e;
             next = n;
+            prev = p;
         }
     }
 
     public Deque() {
         size = 0;
-        first = new DequeNode(null, null);
-        last = new DequeNode(null, null);        
+        first = new DequeNode(null, null,null);
+        last = new DequeNode(null, null,null);        
     }
 
     public boolean isEmpty() {
@@ -31,45 +34,76 @@ public class Deque {
     
     public void makeEmpty() {
         size = 0;
-        first = last = null;        
+        first = last = null;
     }
     
     public void pushFront(Object e) { //ADICIONA ITEM NA FRENTE
+        DequeNode newElement = new DequeNode(e, null, null);
         if (isEmpty()) {
-            first.next = last.next = new DequeNode(e, null);
+            last = newElement;
         } else {
-            first.next = new DequeNode(e, first.next);
+            first.prev = newElement;
+            newElement.next = first;
         }
+        first = newElement;
+        last.next = first;
+        first.prev = last;
         size++;
     }
 
-    public void pushBack(Object elem) { //ADICIONA ITEM NO FUNDO
+    public void pushBack(Object e) { //ADICIONA ITEM NO FUNDO
+        DequeNode newElement = new DequeNode(e, null, null);
         if (isEmpty()) {
-            first.next = last.next = new DequeNode(elem, null);
+            first = newElement;
         } else {
-            last.next.next = last.next = new DequeNode(elem, null);
+            last.next = newElement;
+            newElement.prev = last;
         }
+        last = newElement;
+        last.next = first;
+        first.prev = last;
         size++;
     }
 
     public Object popFront() { //REMOVE ITEM DA FRENTE
         if (isEmpty()) {
             return null;
-        }
-        first.next = first.next.next;
+        }else if(first == last){
+                    first = last = null;
+                    first.prev = first.next = last.next = last.prev = null;
+                } else // remove de uma lista com mais de um elemento
+                {
+                    first = first.next;
+                    last.next = first;
+                    first.prev = last;
+                }
+        size --;
         return null;
     }   
     
-//    public Object popBack() { //REMOVE ITEM DO FIM (NAO CONSEGUI FAZER)
-//        
-//    }     
+    public Object popBack() { //REMOVE ITEM DO FIM ;
+       if (isEmpty()) {
+            return null;
+        } else 
+            if(first == last){
+                first = last = null;
+                first.prev = first.next = last.next = last.prev = null;
+            } 
+            else{
+                last = last.prev;
+                last.next = first;
+                first.prev = last;
+            }
+       size --;
+       return null;
+    }     
 
     
     public Object front() { //DIZ QUEM É O PRIMEIRO DA FILA
         if (isEmpty()) {
             return null;
         }        
-        return first.next.element;     
+        return first.element;     
        
     }
     
@@ -77,14 +111,17 @@ public class Deque {
         if (isEmpty()) {
             return null;
         }  
-        return last.next.element;            
+        return last.element;            
     }
     
     public void printDeque() { //PRINTA A FILA
-        DequeNode itr = first.next;
-
-        while (itr != null) {
-            System.out.println(itr.element.toString());
+         if (this.isEmpty()) {
+            System.out.println("A fila está vazia!");
+            return;
+        }
+        DequeNode itr = first;           
+        for (int i = 0; i < size; i++) {
+           System.out.println(itr.element.toString());
             itr = itr.next;
         }
     }
